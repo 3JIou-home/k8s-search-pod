@@ -23,9 +23,7 @@ async fn main() -> anyhow::Result<()> {
         Ok(m) => { m }
         Err(f) => { panic!("{}", f.to_string()) }
     };
-    if matches.opt_present("h") {
-        print_usage(&program, opts);
-    }
+
     if matches.opt_present("a") {
 
         let address = matches.opt_str("a").unwrap();
@@ -43,6 +41,8 @@ async fn main() -> anyhow::Result<()> {
                                             item.spec.unwrap().node_name.expect("No information")]);
             result_table.printstd();
         }
+    } else {
+        print_usage(&program, opts);
     };
     Ok(())
 }
