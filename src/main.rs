@@ -6,7 +6,7 @@ use getopts::Options;
 use std::env;
 
 fn print_usage(program: &str, opts: Options) {
-    let brief = format!("Usage: {} FILE [options]", program);
+    let brief = format!("Usage: {} Address [options]", program);
     print!("{}", opts.usage(&brief));
 }
 
@@ -23,9 +23,7 @@ async fn main() -> anyhow::Result<()> {
         Ok(m) => { m }
         Err(f) => { panic!("{}", f.to_string()) }
     };
-
     if matches.opt_present("a") {
-
         let address = matches.opt_str("a").unwrap();
         let config = Config::infer().await?;
         let cluster_url = config.cluster_url;
