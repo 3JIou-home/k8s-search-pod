@@ -34,7 +34,7 @@ async fn main() -> anyhow::Result<()> {
         for item in pods.list(&lp).await? {
             let result_table = table!(["Request IP", "Pod name", "Pod namespace", "Pod on node"],
                                         [&address,
-                                            item.name(),
+                                            item.metadata.name.clone().expect("No information"),
                                             item.namespace().expect("No information"),
                                             item.spec.unwrap().node_name.expect("No information")]);
             result_table.printstd();
